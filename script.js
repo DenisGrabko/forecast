@@ -43,7 +43,7 @@ function handleSearch(event) {
 }
 
 function serviceWeather(city, days) {
-  const BASE_URL = "http://api.weatherapi.com/v1";
+  const BASE_URL = "https://api.weatherapi.com/v1";
   const API_KEY = "61fa302bef9a4da28e9100055230710";
 
   const params = new URLSearchParams({
@@ -51,16 +51,19 @@ function serviceWeather(city, days) {
     q: city,
     days,
     lang: "uk",
-  });  
-  
-  return fetch(`${BASE_URL}/forecast.json?${params}`).then((response) => {
-    if(!response.ok) {
-      throw new Error(`Вимушена помилка статусу: ${response.status} | Причина: ${response.statusText}`)
-    }
+  });
 
-    return response.json();
-  })
+  const url = `${BASE_URL}/forecast.json?${params}`;
+
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Вимушена помилка статусу: ${response.status} | Причина: ${response.statusText}`);
+      }
+      return response.json();
+    });
 }
+
 
   
 
