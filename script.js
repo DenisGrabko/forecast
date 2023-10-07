@@ -51,17 +51,17 @@ function serviceWeather(city, days) {
     q: city,
     days,
     lang: "uk",
-  });
+  });  
+  
 
-  const url = `${BASE_URL}/forecast.json?${params}`;
+const url = `${BASE_URL}/forecast.json?${params}`;
+    return fetch(url).then((response) => {
+    if(!response.ok) {
+      throw new Error(`Вимушена помилка статусу: ${response.status} | Причина: ${response.statusText}`)
+    }
 
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Вимушена помилка статусу: ${response.status} | Причина: ${response.statusText}`);
-      }
-      return response.json();
-    });
+    return response.json();
+  })
 }
 
 
